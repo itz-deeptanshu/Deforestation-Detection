@@ -4,7 +4,7 @@ Detecting newly cleared forest using free Sentinel-2 satellite imagery, a
 U-Net segmentation model that maps forest cover, and change detection between
 dates that flags new clearings on an interactive map.
 
-**Status:** in progress (30-day build, currently on Day 3)
+**Status:** in progress (30-day build, currently on Day 5)
 
 ## Approach
 
@@ -61,8 +61,8 @@ config.yaml   single source of truth for settings
 |---|---|---|
 | 1 | Environment, AOI, configuration | yes |
 | 2 | Rasters: CRS, transform, nodata, resampling, reprojection, clipping | yes |
-| 3 | Vectors, polygonize, rasterize | |
-| 4-6 | Sentinel-2 via STAC, bands, NDVI baseline | |
+| 3 | Vectors, polygonize, rasterize | yes |
+| 4-6 | Sentinel-2 via STAC, bands, NDVI baseline | Day 4 Done |
 | 7-14 | Cloud masking, composites, labels, Random Forest baseline | |
 | 15-21 | Tiling, U-Net, training, evaluation | |
 | 22-27 | Change detection, post-processing, validation | |
@@ -75,3 +75,7 @@ config.yaml   single source of truth for settings
 - Mask nodata before computing statistics
 - Resample labels with nearest neighbor, continuous data with bilinear
 - Reproject as little as possible
+- STAC: Catalog > Collection > Item > Asset; read only the window you need from COGs
+- L2A reflectance = (DN - 1000) / 10000 for processing baseline >= 04.00; DN 0 = no data
+- Scene-level cloud cover is only a coarse filter; pixel-level masking comes next
+- The real Sentinel-2 grid (origin on multiples of 10 m) is the master grid
