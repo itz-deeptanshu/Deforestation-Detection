@@ -1,0 +1,13 @@
+aoi_path: aoi/aoi.geojson
+bbox: [-62.3644, -10.3633, -62.1356, -10.1367]  
+utm_epsg: 32720                           
+resolution_m: 10
+
+period_a:
+  start: "2022-06-01"
+  end: "2022-09-30"
+period_b:
+  start: "2024-06-01"
+  end: "2024-09-30"
+
+max_scene_cloud_pct: 40
