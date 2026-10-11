@@ -3,15 +3,18 @@ from pathlib import Path
 import numpy as np
 import rasterio
 
-from config import ROOT
+from config import ROOT, load_config
 
 
 def find_scene_path(date=None):
-    """Path of a saved *_aoi.tif. date like '2022-07-09'; None = the latest file."""
+    """Path of a saved *_aoi.tif. date like '2022-07-09'.
+    If date is None, use reference_date from config.yaml."""
+    if date is None:
+        date = load_config().get("reference_date")
     pattern = f"s2_{date}_*_aoi.tif" if date else "s2_*_aoi.tif"
     files = sorted((ROOT / "data" / "raw").glob(pattern))
     if not files:
-        raise SystemExit("No saved scene found. Run src/load_scene.py first.")
+        raise SystemExit(f"No saved scene found for {date}. Run src/fetch_scene.py first.")
     return files[-1]
 
 

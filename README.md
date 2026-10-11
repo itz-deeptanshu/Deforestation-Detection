@@ -4,7 +4,7 @@ Detecting newly cleared forest using free Sentinel-2 satellite imagery, a
 U-Net segmentation model that maps forest cover, and change detection between
 dates that flags new clearings on an interactive map.
 
-**Status:** in progress (30-day build, currently on Day 5)
+**Status:** in progress (30-day build, currently on Day 7)
 
 ## Approach
 
@@ -62,7 +62,7 @@ config.yaml   single source of truth for settings
 | 1 | Environment, AOI, configuration | yes |
 | 2 | Rasters: CRS, transform, nodata, resampling, reprojection, clipping | yes |
 | 3 | Vectors, polygonize, rasterize | yes |
-| 4-6 | Sentinel-2 via STAC, bands, NDVI baseline | Day 4 Done |
+| 4-6 | Sentinel-2 via STAC, bands, NDVI baseline | yes|
 | 7-14 | Cloud masking, composites, labels, Random Forest baseline | |
 | 15-21 | Tiling, U-Net, training, evaluation | |
 | 22-27 | Change detection, post-processing, validation | |
@@ -79,3 +79,9 @@ config.yaml   single source of truth for settings
 - L2A reflectance = (DN - 1000) / 10000 for processing baseline >= 04.00; DN 0 = no data
 - Scene-level cloud cover is only a coarse filter; pixel-level masking comes next
 - The real Sentinel-2 grid (origin on multiples of 10 m) is the master grid
+- Differencing assumes nothing but land change differs between dates; haze, phenology, processing baseline and shadows all break it
+- Null experiment: difference two scenes 10 days apart to get a false-alarm floor; it underestimates the multi-year problem
+- A one-sided decrease/increase ratio fits both deforestation and a year-wide drying, so it is not proof of clearing
+- AOT (aerosol optical thickness) measures smoke directly; scene cloud cover does not
+- A bound is not an estimate: 886 ha is the most this method could call loss, not what was lost
+- Name outputs after their parameters so later runs never overwrite earlier results
