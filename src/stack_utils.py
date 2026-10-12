@@ -12,6 +12,9 @@ from shapely.geometry import mapping
 from config import ROOT, load_config
 from s2_utils import STAC_URL, load_aoi_4326
 
+import warnings
+warnings.filterwarnings("ignore", message="Dataset has no geotransform")
+
 def master_geobox():
     """The one grid every Day 8+ dataset is read onto (AOI snapped outward to 10 m)."""
     cfg = load_config()

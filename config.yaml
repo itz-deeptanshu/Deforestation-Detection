@@ -6,15 +6,15 @@ resolution_m: 10
 
 period_a:
   start: "2022-06-01"
-  end: "2022-09-30"
+  end: "2022-07-31"
 period_b:
   start: "2024-06-01"
-  end: "2024-09-30"
+  end: "2024-07-31"
 
 max_scene_cloud_pct: 40
 ndvi_forest_threshold: 0.616
 
-scene_aot_max: 0.15
+scene_aot_max: 0.13
 cloud_dilate_px: 5
 scl_keep: [4, 5, 6]
   
