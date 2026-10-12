@@ -4,7 +4,8 @@ Detecting newly cleared forest using free Sentinel-2 satellite imagery, a
 U-Net segmentation model that maps forest cover, and change detection between
 dates that flags new clearings on an interactive map.
 
-**Status:** in progress (30-day build, currently on Day 7)
+**Status:** in progress (30-day build, currently on Day 9)
+| 8 | Lazy stack, deduplication, quality scoring, cloud mask | yes |
 
 ## Approach
 
@@ -63,7 +64,7 @@ config.yaml   single source of truth for settings
 | 2 | Rasters: CRS, transform, nodata, resampling, reprojection, clipping | yes |
 | 3 | Vectors, polygonize, rasterize | yes |
 | 4-6 | Sentinel-2 via STAC, bands, NDVI baseline | yes|
-| 7-14 | Cloud masking, composites, labels, Random Forest baseline | |
+| 7-14 | Cloud masking, composites, labels, Random Forest baseline | day 8 done |
 | 15-21 | Tiling, U-Net, training, evaluation | |
 | 22-27 | Change detection, post-processing, validation | |
 | 28-30 | Interactive map, Streamlit app, documentation | |
@@ -85,3 +86,9 @@ config.yaml   single source of truth for settings
 - AOT (aerosol optical thickness) measures smoke directly; scene cloud cover does not
 - A bound is not an estimate: 886 ha is the most this method could call loss, not what was lost
 - Name outputs after their parameters so later runs never overwrite earlier results
+- Lazy loading (xarray + Dask + odc-stac): build the graph first, compute only what you need
+- Sign URLs at read time (patch_url) when loading lazily; links expire
+- Deduplicate by (date, tile), keep the newest processing baseline
+- Define the master grid explicitly (snap outward to 10 m multiples), then verify against old data
+- Dilate cloud masks using evidence (blue vs distance to cloud), not a guessed number
+- Select scenes by haze (AOT), never by the result you are measuring

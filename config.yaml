@@ -13,3 +13,8 @@ period_b:
 
 max_scene_cloud_pct: 40
 ndvi_forest_threshold: 0.616
+
+scene_aot_max: 0.15
+cloud_dilate_px: 5
+scl_keep: [4, 5, 6]
+  
