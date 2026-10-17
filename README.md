@@ -4,9 +4,8 @@ Detecting newly cleared forest using free Sentinel-2 satellite imagery, a
 U-Net segmentation model that maps forest cover, and change detection between
 dates that flags new clearings on an interactive map.
 
-**Status:** in progress (30-day build, currently on Day 9)
-| 8 | Lazy stack, deduplication, quality scoring, cloud mask | yes |
-
+**Status:** in progress (30-day build, currently on Day 11)
+| 10 | 2024 composite, alignment check, first composite comparison | yes |
 ## Approach
 
 1. Build clean, cloud-free median composites of Sentinel-2 L2A for two dates
@@ -92,3 +91,7 @@ config.yaml   single source of truth for settings
 - Define the master grid explicitly (snap outward to 10 m multiples), then verify against old data
 - Dilate cloud masks using evidence (blue vs distance to cloud), not a guessed number
 - Select scenes by haze (AOT), never by the result you are measuring
+- Build both composites with identical settings; verify alignment by script (metadata, tags, phase correlation)
+- Phase cross-correlation estimates sub-pixel misregistration between two dates
+- Compare composite noise with the single-date noise measured earlier (Day 6) before trusting a method
+- Never tune thresholds from a comparison of the two years; wait for independent labels
