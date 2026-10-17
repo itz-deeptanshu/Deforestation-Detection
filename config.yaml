@@ -17,4 +17,5 @@ ndvi_forest_threshold: 0.616
 scene_aot_max: 0.13
 cloud_dilate_px: 5
 scl_keep: [4, 5, 6]
+min_clear_obs: 3
   
