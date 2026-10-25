@@ -7,7 +7,6 @@ DATES = ["2022-06-24", "2022-07-14", "2022-07-19"]
 BANDS = ["B02", "B03", "B04", "B08"]
 raw, _ = search_dates("2022-06-01", "2022-07-31", 101)
 
-
 def load_one(item):
     ds = load_lazy([item], BANDS + ["SCL"]).isel(time=0).compute()
     dn = np.nan_to_num(np.stack([ds[b].values for b in BANDS]), nan=0).astype("uint16")
