@@ -5,6 +5,7 @@ U-Net segmentation model that maps forest cover, and change detection between
 dates that flags new clearings on an interactive map.
 
 **Status:** in progress (30-day build, currently on Day 12)
+
 | 11 | Label sources, forest definition, label download and agreement | yes |
 
 ## Approach
