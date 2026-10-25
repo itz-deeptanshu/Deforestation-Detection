@@ -4,8 +4,9 @@ Detecting newly cleared forest using free Sentinel-2 satellite imagery, a
 U-Net segmentation model that maps forest cover, and change detection between
 dates that flags new clearings on an interactive map.
 
-**Status:** in progress (30-day build, currently on Day 11)
-| 10 | 2024 composite, alignment check, first composite comparison | yes |
+**Status:** in progress (30-day build, currently on Day 12)
+| 11 | Label sources, forest definition, label download and agreement | yes |
+
 ## Approach
 
 1. Build clean, cloud-free median composites of Sentinel-2 L2A for two dates
@@ -63,7 +64,7 @@ config.yaml   single source of truth for settings
 | 2 | Rasters: CRS, transform, nodata, resampling, reprojection, clipping | yes |
 | 3 | Vectors, polygonize, rasterize | yes |
 | 4-6 | Sentinel-2 via STAC, bands, NDVI baseline | yes|
-| 7-14 | Cloud masking, composites, labels, Random Forest baseline | day 8 done |
+| 7-14 | Cloud masking, composites, labels, Random Forest baseline | day 11 done |
 | 15-21 | Tiling, U-Net, training, evaluation | |
 | 22-27 | Change detection, post-processing, validation | |
 | 28-30 | Interactive map, Streamlit app, documentation | |
@@ -95,3 +96,7 @@ config.yaml   single source of truth for settings
 - Phase cross-correlation estimates sub-pixel misregistration between two dates
 - Compare composite noise with the single-date noise measured earlier (Day 6) before trusting a method
 - Never tune thresholds from a comparison of the two years; wait for independent labels
+- Weak labels come from other people's models: measure their agreement with each other before training on them
+- Match label dates to image dates; ambiguous timing becomes an "ignore" value, not a guess
+- Fix the forest definition from convention before looking at sweeps, or the result is circular
+- Hansen loss year Y is a calendar year; it can fall before or after a June-July composite

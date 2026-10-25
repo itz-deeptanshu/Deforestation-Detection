@@ -1,3 +1,6 @@
+hansen_version: "GFC-2025-v1.13"
+forest_canopy_min: 30
+
 reference_date: "2022-07-09"
 aoi_path: aoi/aoi.geojson
 bbox: [-62.3644, -10.3633, -62.1356, -10.1367]  
