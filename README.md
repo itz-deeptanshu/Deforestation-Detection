@@ -101,3 +101,8 @@ config.yaml   single source of truth for settings
 - Match label dates to image dates; ambiguous timing becomes an "ignore" value, not a guess
 - Fix the forest definition from convention before looking at sweeps, or the result is circular
 - Hansen loss year Y is a calendar year; it can fall before or after a June-July composite
+- Labels live on the master grid: nearest-neighbor resampling, transform checked against master_geobox()
+- Carry a dated map forward with a change layer, or agreement rules throw away the clearings you want
+- Ambiguous timing becomes an ignore value, not a guess
+- Loss only accumulates, so non-forest(A) -> forest(B) must be zero: assert it
+- With independent labels, per-band separability is finally a legitimate measurement
