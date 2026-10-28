@@ -4,9 +4,9 @@ Detecting newly cleared forest using free Sentinel-2 satellite imagery, a
 U-Net segmentation model that maps forest cover, and change detection between
 dates that flags new clearings on an interactive map.
 
-**Status:** in progress (30-day build, currently on Day 12)
+**Status:** in progress (30-day build, currently on Day 13)
 
-| 11 | Label sources, forest definition, label download and agreement | yes |
+| 12 | Aligned labels (A, B, change), ignore values, label checks | yes |
 
 ## Approach
 
